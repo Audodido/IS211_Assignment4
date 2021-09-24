@@ -52,11 +52,36 @@ def ordered_sequential_search(a_list,item):
 
 
 def binary_search_iterative(a_list,item):
-    pass
+    first = 0
+    last = len(a_list) - 1
+    found = False
     
+    while first <= last and not found:
+        midpoint = (first + last) // 2
+        if a_list[midpoint] == item:
+            found = True
+        else:
+            if item < a_list[midpoint]:
+                last = midpoint - 1
+            else:
+                first = midpoint + 1
+
+    return found
+        
     
 def binary_search_recursive(a_list,item):
-    pass
+
+    if len(a_list) == 0:
+        return False
+    else:
+        midpoint = len(a_list) // 2
+    if a_list[midpoint] == item:
+        return True
+    else:
+        if item < a_list[midpoint]:
+            return binary_search(a_list[:midpoint], item)
+        else:
+            return binary_search(a_list[midpoint + 1:], item)
 
 
 def time_getter(func, n, rand_val=True):
@@ -86,9 +111,25 @@ if __name__ == "__main__":
     # average of the average durations
     oss_total_duration = sum([oss_avg_duration_500, oss_avg_duration_1000, oss_avg_duration_5000]) / len([oss_avg_duration_500, oss_avg_duration_1000, oss_avg_duration_5000])
 
+    # BINARY SEARCH ITERATIVE
+    bsi_avg_duration_500 = time_getter("binary_search_iterative", 500, False)
+    bsi_avg_duration_1000 = time_getter("binary_search_iterative", 1000, False)
+    bsi_avg_duration_5000 = time_getter("binary_search_iterative", 5000, False) 
+    # average of the average durations  
+    bsi_total_duration = sum([bsi_avg_duration_500, bsi_avg_duration_1000, bsi_avg_duration_5000]) / len([bsi_avg_duration_500, bsi_avg_duration_1000, bsi_avg_duration_5000])
+
+    # BINARY SEARCH RECURSIVE
+    bsr_avg_duration_500 = time_getter("binary_search_iterative", 500, False)
+    bsr_avg_duration_1000 = time_getter("binary_search_iterative", 1000, False)
+    bsr_avg_duration_5000 = time_getter("binary_search_iterative", 5000, False) 
+    # average of the average durations  
+    bsr_total_duration = sum([bsr_avg_duration_500, bsr_avg_duration_1000, bsr_avg_duration_5000]) / len([bsr_avg_duration_500, bsr_avg_duration_1000, bsr_avg_duration_5000])
+
+
+
     #OUTPUTS
     print("Sequential Search took%10f seconds to run, on average" % ss_total_duration)
     print("Ordered Sequential Search took%10f seconds to run, on average" % oss_total_duration)
-
-
+    print("Binary Search Iterative took%10f seconds to run, on average" % bsi_total_duration)
+    print("Binary Search Recursive took%10f seconds to run, on average" % bsr_total_duration)
 
