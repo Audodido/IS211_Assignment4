@@ -89,6 +89,7 @@ def time_getter(func, n, rand_val=True):
 
     t1 = Timer("{}({},{})".format(func, get_me_random_list(n, rand_val), 99999999), setup="from __main__ import {}".format(func))
     func_avg = t1.timeit(number=100)
+    
     return func_avg
 
 
